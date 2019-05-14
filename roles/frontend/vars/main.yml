@@ -1,0 +1,5 @@
+---
+# vars file for frontend
+packages:
+  - httpie
+  - haproxy

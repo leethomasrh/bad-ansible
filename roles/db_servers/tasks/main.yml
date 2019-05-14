@@ -1,0 +1,21 @@
+---
+# tasks file for db_servers
+- name: install postgres
+  yum:
+    name: postgresql-server
+    state: latest
+# - name: tell user to finish setting up postgres
+#     debug:
+#       msg: "Either uncomment the postgres setup or manually login and initialize"
+
+# only run the next 2 tasks once!
+- name: initilize postgres
+  command: postgresql-setup initdb
+  args:
+    creates: /var/lib/pgsql/data/postgresql.conf
+
+- name: start postgres
+  service:
+    name: postgresql.service
+    state: started
+    enabled: yes
